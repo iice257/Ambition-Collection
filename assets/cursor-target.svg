@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Target cursor with corner brackets -->
+  <g fill="none" stroke="#000" stroke-width="1.5">
+    <!-- Top-left corner -->
+    <path d="M4 4 L4 10" />
+    <path d="M4 4 L10 4" />
+    
+    <!-- Top-right corner -->
+    <path d="M28 4 L28 10" />
+    <path d="M28 4 L22 4" />
+    
+    <!-- Bottom-left corner -->
+    <path d="M4 28 L4 22" />
+    <path d="M4 28 L10 28" />
+    
+    <!-- Bottom-right corner -->
+    <path d="M28 28 L28 22" />
+    <path d="M28 28 L22 28" />
+    
+    <!-- Center crosshair -->
+    <path d="M16 12 L16 20" />
+    <path d="M12 16 L20 16" />
+  </g>
+</svg>

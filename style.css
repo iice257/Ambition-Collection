@@ -7,6 +7,66 @@
   padding: 0;
 }
 
+/* ========================================
+   CUSTOM CURSOR SYSTEM
+   ======================================== */
+#custom-cursor {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+/* Rotating crosshair (default mode) */
+.cursor-crosshair {
+  position: fixed;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+
+/* Snap mode container */
+.cursor-snap {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, left 0.15s ease, top 0.15s ease, width 0.15s ease, height 0.15s ease;
+}
+
+/* Corner brackets */
+.cursor-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: #000;
+  border-style: solid;
+}
+
+.cursor-tl {
+  top: -2px;
+  left: -2px;
+  border-width: 2px 0 0 2px;
+}
+
+.cursor-tr {
+  top: -2px;
+  right: -2px;
+  border-width: 2px 2px 0 0;
+}
+
+.cursor-bl {
+  bottom: -2px;
+  left: -2px;
+  border-width: 0 0 2px 2px;
+}
+
+.cursor-br {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 2px 2px 0;
+}
+
 html,
 body {
   width: 100%;
@@ -185,7 +245,6 @@ section.fading-out {
   color: #000000;
   /* Default GALLERY black */
   transition: color 0.6s ease, opacity 0.6s ease;
-  cursor: pointer;
   line-height: 1.1;
 }
 
@@ -312,7 +371,6 @@ body.fade-out {
 
 /* Label VIEW -> */
 .toggle-option {
-  cursor: pointer;
   color: #ccc;
   text-decoration: none;
   transition: color 0.3s ease, opacity 0.3s ease;
@@ -395,7 +453,6 @@ body.fade-out {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   font-size: 0.85rem;
   color: #000;
-  cursor: pointer;
   text-decoration: none;
 }
 
@@ -501,7 +558,6 @@ body.fade-out {
   align-items: center;
   border: 2px solid #000;
   box-sizing: border-box;
-  cursor: pointer;
   text-decoration: none;
 }
 
@@ -709,7 +765,7 @@ body.fade-out {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   font-size: 0.65rem;
   /* Smaller text */
-  font-weight: 600;
+  font-weight: bold;
   text-transform: uppercase;
   text-decoration: none;
   color: #999;
