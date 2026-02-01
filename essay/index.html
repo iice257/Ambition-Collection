@@ -87,7 +87,7 @@
   <nav class="global-nav-strip" id="essay-nav-strip"
     style="opacity: 0; pointer-events: none; transition: opacity 0.5s ease;">
     <button class="nav-strip-btn" onclick="history.back()">Back</button>
-    <a href="../index.html" class="nav-strip-btn">Home</a>
+    <a href="../" class="nav-strip-btn">Home</a>
   </nav>
 
   <div class="essay-container">
@@ -137,7 +137,8 @@
         <div class="essay-line">to be human .</div>
         <br>
         <br>
-        <div class="essay-line">GALLERY</div>
+        <div class="essay-line"><a href="../list/" class="gallery-link" id="link-gallery"
+            style="text-decoration: underline; color: inherit;">View Gallery</a></div>
         <div style="height: 40vh;"></div>
       </div>
     </div>
@@ -150,11 +151,6 @@
         <span class="text">scroll</span>
       </div>
 
-      <!-- End Page Toggle -->
-      <div class="essay-end-toggle" id="end-toggle">
-        <a href="../list/" class="toggle-label" id="link-gallery">GALLERY</a>
-        <span class="toggle-label active">ESSAY</span>
-      </div>
     </div>
 
   </div>
@@ -166,7 +162,6 @@
       const content = document.getElementById('content');
       const lines = document.querySelectorAll('.essay-line');
       const scrollInd = document.getElementById('scroll-indicator');
-      const endToggle = document.getElementById('end-toggle');
 
       let scrollY = 0;
       // Recalc on load to ensure accuracy
@@ -182,13 +177,11 @@
           scrollInd.classList.remove('hidden');
         }
 
-        // End Toggle & Nav Strip Logic (Show near end)
+        // Nav Strip Logic (Show near end)
         if (scrollY > maxScroll - 300) {
-          endToggle.classList.add('visible');
           document.getElementById('essay-nav-strip').style.opacity = '1';
           document.getElementById('essay-nav-strip').style.pointerEvents = 'auto';
         } else {
-          endToggle.classList.remove('visible');
           document.getElementById('essay-nav-strip').style.opacity = '0';
           document.getElementById('essay-nav-strip').style.pointerEvents = 'none';
         }
