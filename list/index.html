@@ -24,6 +24,17 @@
     body.loaded {
       opacity: 1;
     }
+
+    /* Mobile override for list page */
+    @media (max-width: 768px) {
+      body {
+        overflow: auto;
+        overflow-x: hidden;
+        height: auto;
+        min-height: 100vh;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
   </style>
 </head>
 

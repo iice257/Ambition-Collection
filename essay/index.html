@@ -78,6 +78,17 @@
       filter: blur(10px);
       transition: opacity 0.5s ease, filter 0.5s ease;
     }
+
+    /* Mobile override for essay page */
+    @media (max-width: 768px) {
+      body {
+        overflow: auto;
+        overflow-x: hidden;
+        height: auto;
+        min-height: 100vh;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
   </style>
 </head>
 
