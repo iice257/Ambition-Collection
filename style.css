@@ -1,0 +1,664 @@
+/* Global Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* Critical for scroll hijacking */
+  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  color: #000000;
+}
+
+/* Container */
+#main-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+  /* Slightly faster base transition */
+  z-index: 1;
+}
+
+section.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+section.fading-out {
+  opacity: 0 !important;
+}
+
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+
+/* Image Motif */
+.motif-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vmin;
+  /* Reset to 90vmin per original design for better "motif" feel vs 95 */
+  max-width: 1200px;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.folder-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* "Fix the folder line motif" - ensuring clean rendering */
+  image-rendering: -webkit-optimize-contrast;
+  /* Crispness */
+}
+
+.folder-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* Ensure crisp edges if it's pixel art or specific line art, though regular rendering is fine for png */
+}
+
+
+/* Typography */
+.content-wrapper {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-family: 'Grift Medium', 'Grift', 'Impact', sans-serif;
+  /* Changed to Medium */
+  font-size: clamp(3rem, 11vw, 9rem);
+  font-weight: 500;
+  /* Medium weight */
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.hero-subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  /* Modern look */
+  color: #000000;
+  text-transform: uppercase;
+  /* Requested ALL CAPS */
+  letter-spacing: 0.1em;
+  /* Widen spacing for "Modern Sans Serif" caps look */
+}
+
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.scroll-indicator .line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, #000000 40%, rgba(0, 0, 0, 0) 100%);
+  /* The prompt asked for "lower portion appears brighter or softly glowing" 
+       Since it's black on white, "brighter" usually means fading to transparent or white? 
+       Or maybe literally a glow. Let's try a soft shadow. */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-indicator .text {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  /* Increased from 0.8rem */
+  font-weight: 500;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+}
+
+
+/* ===========================
+   SELECTION SECTION
+   =========================== */
+#selection {
+  background-color: #ffffff;
+}
+
+.selection-wrapper {
+  display: flex;
+  flex-direction: row;
+  /* Side by side */
+  gap: 6vw;
+  /* Slightly separated */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.selection-link {
+  font-family: 'Grift Medium', 'Grift', 'Impact', sans-serif;
+  /* Keeping family but reducing weight appearance */
+  font-size: clamp(2rem, 5vw, 4rem);
+  /* Slightly smaller to fit side-by-side? Or keep large? keeping scalable */
+  font-weight: 300;
+  /* Much lighter */
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000000;
+  /* Default GALLERY black */
+  transition: color 0.6s ease, opacity 0.6s ease;
+  cursor: pointer;
+  line-height: 1.1;
+}
+
+/* Default state: GALLERY black, ESSAY gray */
+/* User prompt: "Default state: GALLERY in full black, ESSAY in a lighter gray" */
+#link-essay {
+  color: #b0b0b0;
+  /* Light gray */
+}
+
+/* Hover Logic
+   On hover over GALLERY: GALLERY black, ESSAY gray (default, but ensure it)
+   On hover over ESSAY: ESSAY black, GALLERY gray
+*/
+
+/* When wrapper is hovered, logic kicks in based on specific child hover */
+.selection-wrapper:hover .selection-link {
+  color: #b0b0b0;
+  /* Default all to gray when hovering container? No, that's complex. */
+}
+
+/* Specific hovers */
+.selection-wrapper:hover #link-gallery:hover {
+  color: #000000;
+}
+
+.selection-wrapper:hover #link-essay:hover {
+  color: #000000;
+}
+
+/* When hovering essay, make gallery gray */
+.selection-wrapper:has(#link-essay:hover) #link-gallery {
+  color: #b0b0b0;
+}
+
+/* When hovering gallery, make essay gray */
+.selection-wrapper:has(#link-gallery:hover) #link-essay {
+  color: #b0b0b0;
+}
+
+/* Fallback for browsers without :has support (though most have it now) - standard sibling selectors are harder here due to order.
+   JS or :has is best. Sticking with :has as it's modern. */
+
+/* ===========================
+   TRANSITIONS (FADE ONLY)
+   =========================== */
+.blur-overlay {
+  display: none;
+}
+
+/* ===========================
+   GALLERY PAGE STYLES
+   =========================== */
+
+/* Page Fade In/Out */
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+/* Gallery Header */
+.gallery-header {
+  padding: 60px 4vw 40px 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.gallery-intro {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.gallery-nav {
+  display: flex;
+  gap: 40px;
+  font-family: "Grift Medium", "Grift", "Impact", sans-serif;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.gallery-nav .nav-item {
+  text-decoration: none;
+  color: #ccc;
+  /* Inactive Gray */
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-nav .nav-item.active {
+  color: #000;
+}
+
+/* View Toggle */
+.view-toggle {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  /* Slightly larger */
+  font-weight: 600;
+  /* Bolder */
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #ccc;
+  /* Default separator color */
+  cursor: default;
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.view-toggle span {
+  color: #000 !important;
+  /* Separator/Label text */
+}
+
+/* Label VIEW -> */
+.toggle-option {
+  cursor: pointer;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  opacity: 0.5;
+  /* Fade out inactive */
+}
+
+.toggle-option.active {
+  color: #000;
+  text-decoration: underline;
+  /* Undergraduate active */
+  opacity: 1;
+}
+
+/* Gallery Container */
+.gallery-container {
+  width: 100%;
+  /* Padding removed generally, applied specifically to children */
+  padding: 0;
+}
+
+.gallery-list-view {
+  padding: 0 8vw 100px 8vw;
+  /* Keep list padded */
+}
+
+/* --- LIST VIEW --- */
+.gallery-list-view {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.list-row {
+  display: grid;
+  grid-template-columns: 80px 100px 1fr 150px;
+  /* Image, Year, Title, Artist */
+  align-items: center;
+  padding: 20px 0;
+  column-gap: 30px;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.9rem;
+  color: #000;
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.list-row:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.list-row:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.list-row:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.list-row:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.list-row:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+.list-row:nth-child(6) {
+  animation-delay: 0.35s;
+}
+
+.list-row:nth-child(7) {
+  animation-delay: 0.4s;
+}
+
+.list-row:nth-child(8) {
+  animation-delay: 0.45s;
+}
+
+.list-row:nth-child(9) {
+  animation-delay: 0.5s;
+}
+
+.list-row:nth-child(10) {
+  animation-delay: 0.55s;
+}
+
+.list-row:nth-child(11) {
+  animation-delay: 0.6s;
+}
+
+.list-thumb {
+  width: 60px;
+  height: 60px;
+  background-color: #f5f5f5;
+  object-fit: cover;
+  display: block;
+}
+
+.col-year {
+  color: #888;
+  font-weight: 400;
+}
+
+.col-title {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1rem;
+}
+
+.col-artist {
+  text-align: right;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- GRID VIEW --- */
+.gallery-grid-view {
+  display: none;
+  width: 100%;
+}
+
+.gallery-grid-view.active {
+  display: block;
+}
+
+.gallery-list-view.hidden {
+  display: none;
+}
+
+/* Custom Grid Layout: 3 - 3 - 4 - 1 */
+/* Custom Grid Layout: 3 - 3 - 4 - 1 */
+/* Compacted to fit on page (no scroll) */
+/* Custom Grid Layout: 3 - 3 - 4 - 1 */
+/* Edge to Edge, zoomed crops */
+.custom-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0.5vw;
+  /* Very tight gaps */
+  row-gap: 0.5vw;
+  height: calc(100vh - 200px);
+  /* Fit viewport */
+  min-height: 0;
+  width: 100%;
+  padding: 0 0.5vw;
+  /* Slight edge buffer or 0? "Full width edge to edge". Let's do 0. */
+  padding: 0;
+}
+
+.grid-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Fill grid cell */
+  overflow: hidden;
+  /* Crop if needed or contain */
+  opacity: 0;
+  animation: fadeInUp 0.5s ease forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Ensure full image is visible, use cover if cropping allowed */
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.grid-img:hover {
+  filter: grayscale(0%);
+}
+
+/* Row 1 (Items 1-3) */
+.grid-item:nth-child(1),
+.grid-item:nth-child(2),
+.grid-item:nth-child(3) {
+  grid-column: span 4;
+  animation-delay: 0.1s;
+}
+
+/* Row 2 (Items 4-6) */
+.grid-item:nth-child(4),
+.grid-item:nth-child(5),
+.grid-item:nth-child(6) {
+  grid-column: span 4;
+  animation-delay: 0.2s;
+}
+
+/* Row 3 (Items 7-10) */
+.grid-item:nth-child(7),
+.grid-item:nth-child(8),
+.grid-item:nth-child(9),
+.grid-item:nth-child(10) {
+  grid-column: span 3;
+  animation-delay: 0.3s;
+}
+
+/* Row 4 (Item 11) */
+.grid-item:nth-child(11) {
+  grid-column: 5 / span 4;
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ESSAY PAGE RIGHT COLUMN ELEMENTS */
+.essay-visual-slot {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.essay-scroll-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 12px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.essay-scroll-indicator .line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, #000000 40%, rgba(0, 0, 0, 0) 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.essay-scroll-indicator .text {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.essay-scroll-indicator.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* End of Essay Toggle */
+.essay-end-toggle {
+  position: absolute;
+  /* Centered vertically? Or at bottom? "Add a GALLERY / ESSAY toggle on the right side". 
+       "Fade in only when the user reaches the end". 
+       Let"s place it center-right or bottom-right. 
+       "Right side of the page" -> Right column. */
+  bottom: 40vh;
+  /* Visual sweet spot */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+.essay-end-toggle.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.essay-end-toggle .toggle-label {
+  font-family: "Grift Medium", sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.essay-end-toggle .toggle-label.active {
+  color: #000;
+}
+
+
+/* GLOBAL NAVIGATION STRIP */
+.global-nav-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  /* Reduced height */
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  /* Back Left, Home Right */
+  align-items: center;
+  padding: 0 4vw;
+  z-index: 1000;
+}
+
+.nav-strip-btn {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.65rem;
+  /* Smaller text */
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #999;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.nav-strip-btn:hover {
+  color: #000;
+}

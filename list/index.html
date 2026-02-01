@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ambition Collection - Gallery</title>
+  <link rel="icon" type="image/png" href="../assets/ambition favicon.png">
+  <link rel="shortcut icon" href="../assets/ambition favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/ambition favicon.png">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      padding-top: 40px;
+      /* Push content down for nav strip */
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- GLOBAL NAV STRIP -->
+  <nav class="global-nav-strip">
+    <button class="nav-strip-btn" onclick="history.back()">Back</button>
+    <a href="../index.html" class="nav-strip-btn">Home</a>
+  </nav>
+
+  <header class="gallery-header">
+    <div class="gallery-intro">A visual essay on the Human Psyche</div>
+
+    <nav class="gallery-nav">
+      <span class="nav-item active">GALLERY</span>
+      <a href="../essay/" class="nav-item" id="nav-essay">ESSAY</a>
+    </nav>
+
+    <div class="view-toggle">
+      <span>VIEW &rarr;</span>
+      <span class="toggle-option" id="btn-grid">GRID</span>
+      <span>|</span>
+      <span class="toggle-option active" id="btn-list">LIST</span>
+    </div>
+  </header>
+
+  <main class="gallery-container">
+
+    <!-- LIST VIEW -->
+    <div class="gallery-list-view" id="view-list">
+      <!-- Generating List Items with corrected paths -->
+      <div class="list-row"><img src="../assets/collection/day 1, man 1 - ambition.png" class="list-thumb"
+          alt="Ambition"><span class="col-year">2025</span><span class="col-title">AMBITION</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 2, woman 1  - discipline.png" class="list-thumb"
+          alt="Discipline"><span class="col-year">2025</span><span class="col-title">DISCIPLINE</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 3, man 2  - confidence.png" class="list-thumb"
+          alt="Confidence"><span class="col-year">2025</span><span class="col-title">CONFIDENCE</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 4, woman 2 - obsession.png" class="list-thumb"
+          alt="Obsession"><span class="col-year">2025</span><span class="col-title">OBSESSION</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 5, man 3 - detached.png" class="list-thumb"
+          alt="Detached"><span class="col-year">2025</span><span class="col-title">DETACHED</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 6, woman 3 - restless.png" class="list-thumb"
+          alt="Restless"><span class="col-year">2025</span><span class="col-title">RESTLESS</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 7, man 4 - lonely.png" class="list-thumb"
+          alt="Lonely"><span class="col-year">2025</span><span class="col-title">LONELY</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 8, woman 3 - insecure.png" class="list-thumb"
+          alt="Insecure"><span class="col-year">2025</span><span class="col-title">INSECURE</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 9, woman 4 - envy.png" class="list-thumb"
+          alt="Envy"><span class="col-year">2025</span><span class="col-title">ENVY</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 10, man 5  - fractured.png" class="list-thumb"
+          alt="Fractured"><span class="col-year">2025</span><span class="col-title">FRACTURED</span><span
+          class="col-artist">ICE</span></div>
+      <div class="list-row"><img src="../assets/collection/day 11, final man - human.png" class="list-thumb"
+          alt="Human"><span class="col-year">2025</span><span class="col-title">HUMAN</span><span
+          class="col-artist">ICE</span></div>
+    </div>
+
+    <!-- GRID VIEW -->
+    <div class="gallery-grid-view" id="view-grid">
+      <div class="custom-grid">
+        <div class="grid-item"><img src="../assets/collection/day 1, man 1 - ambition.png" class="grid-img"
+            alt="Ambition"></div>
+        <div class="grid-item"><img src="../assets/collection/day 2, woman 1  - discipline.png" class="grid-img"
+            alt="Discipline"></div>
+        <div class="grid-item"><img src="../assets/collection/day 3, man 2  - confidence.png" class="grid-img"
+            alt="Confidence"></div>
+
+        <div class="grid-item"><img src="../assets/collection/day 4, woman 2 - obsession.png" class="grid-img"
+            alt="Obsession"></div>
+        <div class="grid-item"><img src="../assets/collection/day 5, man 3 - detached.png" class="grid-img"
+            alt="Detached"></div>
+        <div class="grid-item"><img src="../assets/collection/day 6, woman 3 - restless.png" class="grid-img"
+            alt="Restless"></div>
+
+        <div class="grid-item"><img src="../assets/collection/day 7, man 4 - lonely.png" class="grid-img" alt="Lonely">
+        </div>
+        <div class="grid-item"><img src="../assets/collection/day 8, woman 3 - insecure.png" class="grid-img"
+            alt="Insecure"></div>
+        <div class="grid-item"><img src="../assets/collection/day 9, woman 4 - envy.png" class="grid-img" alt="Envy">
+        </div>
+        <div class="grid-item"><img src="../assets/collection/day 10, man 5  - fractured.png" class="grid-img"
+            alt="Fractured"></div>
+
+        <div class="grid-item"><img src="../assets/collection/day 11, final man - human.png" class="grid-img"
+            alt="Human"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+
+      const btnGrid = document.getElementById('btn-grid');
+      const btnList = document.getElementById('btn-list');
+      const viewGrid = document.getElementById('view-grid');
+      const viewList = document.getElementById('view-list');
+
+      function switchView(view) {
+        if (view === 'grid') {
+          btnGrid.classList.add('active');
+          btnList.classList.remove('active');
+          viewGrid.classList.add('active');
+          viewList.classList.add('hidden');
+        } else {
+          btnList.classList.add('active');
+          btnGrid.classList.remove('active');
+          viewList.classList.remove('hidden');
+          viewGrid.classList.remove('active');
+        }
+      }
+
+      btnGrid.addEventListener('click', () => switchView('grid'));
+      btnList.addEventListener('click', () => switchView('list'));
+      switchView('list');
+
+      const essayLink = document.getElementById('nav-essay');
+      if (essayLink) {
+        essayLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.body.style.opacity = '0';
+          setTimeout(() => {
+            window.location.href = '../essay/'; // Clean URL
+          }, 800);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ambition Collection - Essay</title>
+  <link rel="icon" type="image/png" href="../assets/ambition favicon.png">
+  <link rel="shortcut icon" href="../assets/ambition favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/ambition favicon.png">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    .essay-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      height: 100vh;
+      width: 100%;
+      padding: 0 5vw;
+    }
+
+    .text-column {
+      grid-column: span 3;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-top: 15vh;
+      position: relative;
+    }
+
+    /* Right Column for Visuals (Slot) */
+    .essay-visual-slot {
+      grid-column: span 1;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .essay-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+      transform: translateY(0);
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+
+    .essay-line {
+      font-family: 'Grift Medium', 'Grift', 'Impact', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      color: #000;
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 0.5s ease, filter 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- GLOBAL NAV STRIP (Hidden initially on Essay, revealed at end) -->
+  <nav class="global-nav-strip" id="essay-nav-strip"
+    style="opacity: 0; pointer-events: none; transition: opacity 0.5s ease;">
+    <button class="nav-strip-btn" onclick="history.back()">Back</button>
+    <a href="../index.html" class="nav-strip-btn">Home</a>
+  </nav>
+
+  <div class="essay-container">
+
+    <!-- TEXT CONTENT -->
+    <div class="text-column">
+      <div class="essay-text-wrapper" id="content">
+        <div class="essay-line">This collection is a study</div>
+        <div class="essay-line">of human traits under pressure</div>
+        <br>
+        <div class="essay-line">Not as labels or identities</div>
+        <div class="essay-line">but as forces shaping behavior</div>
+        <br>
+        <div class="essay-line">Each portrait shares the same frame</div>
+        <div class="essay-line">because structure rarely changes</div>
+        <br>
+        <div class="essay-line">Expression shifts</div>
+        <div class="essay-line">posture shifts</div>
+        <div class="essay-line">meaning shifts</div>
+        <br>
+        <div class="essay-line">Repetition is not aesthetic</div>
+        <div class="essay-line">it is an instrument of clarity</div>
+        <br>
+        <div class="essay-line">When novelty is removed</div>
+        <div class="essay-line">attention turns inward</div>
+        <br>
+        <div class="essay-line">What remains is not personality</div>
+        <div class="essay-line">but tension held beneath surfaces</div>
+        <br>
+        <div class="essay-line">Ambition coexists with emptiness</div>
+        <div class="essay-line">confidence with quiet doubt</div>
+        <br>
+        <div class="essay-line">Fracture does not mean broken</div>
+        <div class="essay-line">it means once whole</div>
+        <br>
+        <div class="essay-line">These images are observations</div>
+        <div class="essay-line">not judgments or prescriptions</div>
+        <br>
+        <div class="essay-line">They exist between distance</div>
+        <div class="essay-line">and uncomfortable self recognition</div>
+        <br>
+        <div class="essay-line">Created in 2025</div>
+        <div class="essay-line">by ICE</div>
+        <br>
+        <div class="essay-line">As a visual essay</div>
+        <div class="essay-line">on what it means</div>
+        <div class="essay-line">to be human .</div>
+        <br>
+        <br>
+        <div class="essay-line">GALLERY</div>
+        <div style="height: 40vh;"></div>
+      </div>
+    </div>
+
+    <!-- VISUAL SLOT (Right Column) -->
+    <div class="essay-visual-slot">
+      <!-- Scroll Indicator -->
+      <div class="essay-scroll-indicator" id="scroll-indicator">
+        <div class="line"></div>
+        <span class="text">scroll</span>
+      </div>
+
+      <!-- End Page Toggle -->
+      <div class="essay-end-toggle" id="end-toggle">
+        <a href="../list/" class="toggle-label" id="link-gallery">GALLERY</a>
+        <span class="toggle-label active">ESSAY</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+
+      const content = document.getElementById('content');
+      const lines = document.querySelectorAll('.essay-line');
+      const scrollInd = document.getElementById('scroll-indicator');
+      const endToggle = document.getElementById('end-toggle');
+
+      let scrollY = 0;
+      // Recalc on load to ensure accuracy
+      const maxScroll = content.offsetHeight - window.innerHeight + 200;
+
+      function updateVisuals() {
+        content.style.transform = `translateY(${-scrollY}px)`;
+
+        // Indicators logic
+        if (scrollY > 50) {
+          scrollInd.classList.add('hidden');
+        } else {
+          scrollInd.classList.remove('hidden');
+        }
+
+        // End Toggle & Nav Strip Logic (Show near end)
+        if (scrollY > maxScroll - 300) {
+          endToggle.classList.add('visible');
+          document.getElementById('essay-nav-strip').style.opacity = '1';
+          document.getElementById('essay-nav-strip').style.pointerEvents = 'auto';
+        } else {
+          endToggle.classList.remove('visible');
+          document.getElementById('essay-nav-strip').style.opacity = '0';
+          document.getElementById('essay-nav-strip').style.pointerEvents = 'none';
+        }
+
+        // Text Focus
+        lines.forEach(line => {
+          const rect = line.getBoundingClientRect();
+          const top = rect.top;
+          const viewportH = window.innerHeight;
+          const zoneStart = viewportH * 0.15;
+          const zoneEnd = viewportH * 0.55;
+
+          let opacity = 0;
+          let blur = 10;
+
+          if (top > zoneStart && top < zoneEnd) {
+            opacity = 1; blur = 0;
+          } else if (top >= zoneEnd && top < viewportH) {
+            const dist = top - zoneEnd;
+            const maxDist = viewportH - zoneEnd;
+            const ratio = 1 - (dist / (maxDist * 0.6));
+            opacity = Math.max(0, ratio);
+            blur = (1 - ratio) * 10;
+          } else if (top <= zoneStart && top > -100) {
+            const dist = zoneStart - top;
+            const ratio = 1 - (dist / 150);
+            opacity = Math.max(0, ratio);
+            blur = (1 - ratio) * 10;
+          }
+          line.style.opacity = opacity;
+          line.style.filter = `blur(${blur}px)`;
+        });
+      }
+
+      updateVisuals();
+
+      window.addEventListener('wheel', (e) => {
+        scrollY += e.deltaY;
+        if (scrollY < 0) scrollY = 0;
+        if (scrollY > maxScroll) scrollY = maxScroll;
+        requestAnimationFrame(updateVisuals);
+      });
+
+      // Gallery Link Transition
+      const galleryLink = document.getElementById('link-gallery');
+      if (galleryLink) {
+        galleryLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.body.style.opacity = '0';
+          setTimeout(() => {
+            window.location.href = '../list/';
+          }, 800);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
