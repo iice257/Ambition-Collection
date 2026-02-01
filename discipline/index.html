@@ -73,6 +73,75 @@
       line-height: 1.7;
       color: #333;
       max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .fullscreen-btn {
+      display: inline-block;
+      width: fit-content;
+      background: #000;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 0;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .fullscreen-btn:hover {
+      opacity: 0.7;
+    }
+
+    .fullscreen-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .fullscreen-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .fullscreen-overlay img {
+      max-width: 95vw;
+      max-height: 95vh;
+      object-fit: contain;
+    }
+
+    .fullscreen-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 10px 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    .fullscreen-close:hover {
+      opacity: 0.7;
     }
   </style>
 </head>
@@ -84,7 +153,7 @@
   </nav>
 
   <div class="artwork-container">
-    <img src="../assets/collection/day 2, woman 1  - discipline.png" class="artwork-image" alt="Discipline">
+    <img src="../assets/collection/day 2, woman 1  - discipline.jpg" class="artwork-image" alt="Discipline">
     <div class="artwork-info">
       <h1 class="artwork-title">Discipline</h1>
       <div class="artwork-meta">Day 2 · Woman 1 · ICE · 2025</div>
@@ -93,12 +162,25 @@
         Discipline is not restraint—it is power delayed. Every gesture calculated,
         every silence deliberate. What appears cold is often just precise.
       </p>
+      <button class="fullscreen-btn" id="open-fullscreen">View Full-Res Image</button>
     </div>
+  </div>
+
+  <div class="fullscreen-overlay" id="fullscreen-overlay">
+    <button class="fullscreen-close" id="close-fullscreen">Close</button>
+    <img src="../assets/collection/full res/day 2, woman 1  - discipline.png" alt="Discipline Full Resolution">
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+      const overlay = document.getElementById('fullscreen-overlay');
+      const openBtn = document.getElementById('open-fullscreen');
+      const closeBtn = document.getElementById('close-fullscreen');
+      openBtn.addEventListener('click', () => overlay.classList.add('active'));
+      closeBtn.addEventListener('click', () => overlay.classList.remove('active'));
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.classList.remove('active'); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') overlay.classList.remove('active'); });
     });
   </script>
   <script src="../cursor.js"></script>
