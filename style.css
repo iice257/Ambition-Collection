@@ -378,9 +378,12 @@ body.fade-out {
   animation-delay: 0.35s;
 }
 
-/* Full width row for entry 11 */
+/* Full width row for entry 11 - Centered with emphasis */
 .list-full-row {
   grid-template-columns: 1fr;
+  justify-items: center;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 
 /* Base entry styles */
@@ -392,6 +395,8 @@ body.fade-out {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   font-size: 0.85rem;
   color: #000;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 /* Left entry: Thumb, Day, Title only */
@@ -404,9 +409,19 @@ body.fade-out {
   grid-template-columns: 50px 60px 1fr 60px 60px;
 }
 
-/* Full width entry */
+/* Full width entry - Emphasized as conclusion */
 .list-entry-full {
-  grid-template-columns: 50px 60px 1fr 60px 60px;
+  grid-template-columns: 60px 70px 1fr 60px 60px;
+}
+
+.list-entry-full .list-thumb {
+  width: 60px;
+  height: 60px;
+}
+
+.list-entry-full .col-title {
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .list-thumb {
@@ -465,12 +480,13 @@ body.fade-out {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 4px;
-  row-gap: 4px;
+  gap: 12px;
+  row-gap: 12px;
   height: calc(100vh - 200px);
   min-height: 0;
   width: 100%;
   padding: 0;
+  margin-bottom: 60px;
 }
 
 .grid-item {
@@ -483,8 +499,10 @@ body.fade-out {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #000;
+  border: 2px solid #000;
   box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .grid-img {
@@ -500,19 +518,16 @@ body.fade-out {
   filter: grayscale(0%);
 }
 
-/* Title overlay on hover */
+/* Title overlay on hover - Matches GALLERY/ESSAY style */
 .grid-title {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
+  bottom: 20px;
+  left: 20px;
+  font-family: 'Grift Medium', 'Grift', 'Impact', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: #fff;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 6px 10px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -614,45 +629,63 @@ body.fade-out {
   pointer-events: none;
 }
 
-/* End of Essay Toggle */
-.essay-end-toggle {
+/* Essay End-State Artwork List */
+.essay-artwork-list {
   position: absolute;
-  /* Centered vertically? Or at bottom? "Add a GALLERY / ESSAY toggle on the right side". 
-       "Fade in only when the user reaches the end". 
-       Let"s place it center-right or bottom-right. 
-       "Right side of the page" -> Right column. */
-  bottom: 40vh;
-  /* Visual sweet spot */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, -50%, 0);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  text-align: center;
+  gap: 8px;
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 0.5s ease;
   pointer-events: none;
+  will-change: opacity;
+  backface-visibility: hidden;
 }
 
-.essay-end-toggle.visible {
+.essay-artwork-list.visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-.essay-end-toggle .toggle-label {
-  font-family: "Grift Medium", sans-serif;
-  font-size: 1.5rem;
-  text-transform: uppercase;
+.essay-artwork-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   text-decoration: none;
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.essay-end-toggle .toggle-label.active {
   color: #000;
+  padding: 6px 0;
+  transition: opacity 0.3s ease;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
+.essay-artwork-item:hover {
+  opacity: 0.6;
+}
+
+.essay-artwork-item img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+  transform: translate3d(0, 0, 0);
+}
+
+.essay-artwork-item:hover img {
+  filter: grayscale(0%);
+}
+
+.essay-artwork-item span {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 /* GLOBAL NAVIGATION STRIP */
 .global-nav-strip {

@@ -151,6 +151,53 @@
         <span class="text">scroll</span>
       </div>
 
+      <!-- Artwork List (appears at end state) -->
+      <div class="essay-artwork-list" id="artwork-list">
+        <a href="../ambition/" class="essay-artwork-item">
+          <img src="../assets/collection/day 1, man 1 - ambition.png" alt="Ambition">
+          <span>Ambition</span>
+        </a>
+        <a href="../discipline/" class="essay-artwork-item">
+          <img src="../assets/collection/day 2, woman 1  - discipline.png" alt="Discipline">
+          <span>Discipline</span>
+        </a>
+        <a href="../confidence/" class="essay-artwork-item">
+          <img src="../assets/collection/day 3, man 2  - confidence.png" alt="Confidence">
+          <span>Confidence</span>
+        </a>
+        <a href="../obsession/" class="essay-artwork-item">
+          <img src="../assets/collection/day 4, woman 2 - obsession.png" alt="Obsession">
+          <span>Obsession</span>
+        </a>
+        <a href="../detached/" class="essay-artwork-item">
+          <img src="../assets/collection/day 5, man 3 - detached.png" alt="Detached">
+          <span>Detached</span>
+        </a>
+        <a href="../restless/" class="essay-artwork-item">
+          <img src="../assets/collection/day 6, woman 3 - restless.png" alt="Restless">
+          <span>Restless</span>
+        </a>
+        <a href="../lonely/" class="essay-artwork-item">
+          <img src="../assets/collection/day 7, man 4 - lonely.png" alt="Lonely">
+          <span>Lonely</span>
+        </a>
+        <a href="../insecure/" class="essay-artwork-item">
+          <img src="../assets/collection/day 8, woman 3 - insecure.png" alt="Insecure">
+          <span>Insecure</span>
+        </a>
+        <a href="../envy/" class="essay-artwork-item">
+          <img src="../assets/collection/day 9, woman 4 - envy.png" alt="Envy">
+          <span>Envy</span>
+        </a>
+        <a href="../fractured/" class="essay-artwork-item">
+          <img src="../assets/collection/day 10, man 5  - fractured.png" alt="Fractured">
+          <span>Fractured</span>
+        </a>
+        <a href="../human/" class="essay-artwork-item">
+          <img src="../assets/collection/day 11, final man - human.png" alt="Human">
+          <span>Human</span>
+        </a>
+      </div>
     </div>
 
   </div>
@@ -159,9 +206,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => { document.body.classList.add('loaded'); }, 100);
 
+      // Preload artwork list images to prevent stutter
+      const artworkImages = document.querySelectorAll('.essay-artwork-item img');
+      artworkImages.forEach(img => {
+        if (img.complete) return;
+        img.loading = 'eager'; // Force eager loading
+        const newImg = new Image();
+        newImg.src = img.src;
+      });
+
       const content = document.getElementById('content');
       const lines = document.querySelectorAll('.essay-line');
       const scrollInd = document.getElementById('scroll-indicator');
+      const artworkList = document.getElementById('artwork-list');
 
       let scrollY = 0;
       // Recalc on load to ensure accuracy
@@ -170,20 +227,22 @@
       function updateVisuals() {
         content.style.transform = `translateY(${-scrollY}px)`;
 
-        // Indicators logic
+        // Scroll indicator - hide early
         if (scrollY > 50) {
           scrollInd.classList.add('hidden');
         } else {
           scrollInd.classList.remove('hidden');
         }
 
-        // Nav Strip Logic (Show near end)
+        // Nav Strip and Artwork List Logic (Show at end - synced together)
         if (scrollY > maxScroll - 300) {
           document.getElementById('essay-nav-strip').style.opacity = '1';
           document.getElementById('essay-nav-strip').style.pointerEvents = 'auto';
+          artworkList.classList.add('visible');
         } else {
           document.getElementById('essay-nav-strip').style.opacity = '0';
           document.getElementById('essay-nav-strip').style.pointerEvents = 'none';
+          artworkList.classList.remove('visible');
         }
 
         // Text Focus

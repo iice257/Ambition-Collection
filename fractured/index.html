@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fractured - Ambition Collection</title>
+  <link rel="icon" type="image/png" href="../assets/ambition favicon.png">
+  <link rel="shortcut icon" href="../assets/ambition favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/ambition favicon.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      background: #fff;
+      min-height: 100vh;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    .artwork-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding: 60px 5vw;
+      gap: 5vw;
+      align-items: center;
+    }
+
+    .artwork-image {
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .artwork-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 0;
+    }
+
+    .artwork-title {
+      font-family: 'Bodoni Moda', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+
+    .artwork-meta {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+      margin-bottom: 2rem;
+    }
+
+    .artwork-description {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #333;
+      max-width: 480px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="global-nav-strip">
+    <button class="nav-strip-btn" onclick="history.back()">Back</button>
+    <a href="../" class="nav-strip-btn">Home</a>
+  </nav>
+
+  <div class="artwork-container">
+    <img src="../assets/collection/day 10, man 5  - fractured.png" class="artwork-image" alt="Fractured">
+    <div class="artwork-info">
+      <h1 class="artwork-title">Fractured</h1>
+      <div class="artwork-meta">Day 10 · Man 5 · ICE · 2025</div>
+      <p class="artwork-description">
+        Broken but still standing. The cracks are visible if you know where to look.
+        Fracture does not mean failure—it means pressure exceeded capacity.
+        This portrait holds the beauty of imperfect persistence.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => { document.body.classList.add('loaded'); }, 100);
+    });
+  </script>
+</body>
+
+</html>
