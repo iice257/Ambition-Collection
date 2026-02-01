@@ -223,6 +223,13 @@
       let scrollY = 0;
       // Recalc on load to ensure accuracy
       const maxScroll = content.offsetHeight - window.innerHeight + 200;
+      const navStrip = document.getElementById('essay-nav-strip');
+      const viewportH = window.innerHeight;
+      const zoneStart = viewportH * 0.15;
+      const zoneEnd = viewportH * 0.55;
+      const maxDist = viewportH - zoneEnd;
+
+      let isAtEnd = false; // Track state to avoid repeated class toggles
 
       function updateVisuals() {
         content.style.transform = `translateY(${-scrollY}px)`;
@@ -235,24 +242,26 @@
         }
 
         // Nav Strip and Artwork List Logic (Show at end - synced together)
-        if (scrollY > maxScroll - 300) {
-          document.getElementById('essay-nav-strip').style.opacity = '1';
-          document.getElementById('essay-nav-strip').style.pointerEvents = 'auto';
-          artworkList.classList.add('visible');
-        } else {
-          document.getElementById('essay-nav-strip').style.opacity = '0';
-          document.getElementById('essay-nav-strip').style.pointerEvents = 'none';
-          artworkList.classList.remove('visible');
+        const shouldShowEnd = scrollY > maxScroll - 300;
+        if (shouldShowEnd !== isAtEnd) {
+          isAtEnd = shouldShowEnd;
+          if (isAtEnd) {
+            navStrip.style.opacity = '1';
+            navStrip.style.pointerEvents = 'auto';
+            artworkList.classList.add('visible');
+          } else {
+            navStrip.style.opacity = '0';
+            navStrip.style.pointerEvents = 'none';
+            artworkList.classList.remove('visible');
+          }
         }
 
-        // Text Focus
-        lines.forEach(line => {
-          const rect = line.getBoundingClientRect();
-          const top = rect.top;
-          const viewportH = window.innerHeight;
-          const zoneStart = viewportH * 0.15;
-          const zoneEnd = viewportH * 0.55;
+        // Text Focus - batch read then batch write
+        const rects = [];
+        lines.forEach(line => rects.push(line.getBoundingClientRect().top));
 
+        lines.forEach((line, i) => {
+          const top = rects[i];
           let opacity = 0;
           let blur = 10;
 
@@ -260,7 +269,6 @@
             opacity = 1; blur = 0;
           } else if (top >= zoneEnd && top < viewportH) {
             const dist = top - zoneEnd;
-            const maxDist = viewportH - zoneEnd;
             const ratio = 1 - (dist / (maxDist * 0.6));
             opacity = Math.max(0, ratio);
             blur = (1 - ratio) * 10;
