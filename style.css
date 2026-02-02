@@ -206,11 +206,8 @@ section.fading-out {
 .scroll-indicator .line {
   width: 1px;
   height: 60px;
-  background: linear-gradient(to bottom, #000000 40%, rgba(0, 0, 0, 0) 100%);
-  /* The prompt asked for "lower portion appears brighter or softly glowing" 
-       Since it's black on white, "brighter" usually means fading to transparent or white? 
-       Or maybe literally a glow. Let's try a soft shadow. */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: #000;
+  box-shadow: none;
 }
 
 .scroll-indicator .text {
@@ -551,7 +548,7 @@ body.fade-out {
   min-height: 0;
   width: 100%;
   padding: 0;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
 }
 
 .grid-item {
@@ -674,8 +671,8 @@ body.fade-out {
 .essay-scroll-indicator .line {
   width: 1px;
   height: 60px;
-  background: linear-gradient(to bottom, #000000 40%, rgba(0, 0, 0, 0) 100%);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: #000;
+  box-shadow: none;
 }
 
 .essay-scroll-indicator .text {
@@ -840,19 +837,23 @@ body.fade-out {
 
   .gallery-nav {
     gap: 16px;
+    font-size: 1.5rem;
   }
 
   .nav-item {
-    font-size: 0.85rem;
+    font-size: 1.5rem;
   }
 
   .view-toggle {
     font-size: 0.75rem;
     gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   .toggle-option {
-    padding: 8px 12px;
+    padding: 6px 10px;
   }
 
   /* --- GALLERY CONTAINER MOBILE --- */
@@ -935,6 +936,13 @@ body.fade-out {
     height: auto;
   }
 
+  /* Center the 11th (last) grid item on mobile */
+  .grid-item:nth-child(11) {
+    grid-column: 1 / -1 !important;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
   .grid-img {
     filter: grayscale(0%);
   }
@@ -959,7 +967,8 @@ body.fade-out {
   .text-column {
     width: 100%;
     height: auto;
-    padding-top: 20px;
+    padding-top: 40vh;
+    padding-bottom: 20vh;
     order: 1;
   }
 

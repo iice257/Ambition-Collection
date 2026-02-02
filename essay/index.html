@@ -88,6 +88,63 @@
         min-height: 100vh;
         -webkit-overflow-scrolling: touch;
       }
+
+      .essay-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+        padding: 60px 16px 40px 16px;
+      }
+
+      .text-column {
+        width: 100%;
+        height: auto;
+        padding-top: 20vh;
+        padding-bottom: 20px;
+        order: 1;
+      }
+
+      .essay-visual-slot {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        order: 2;
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      .essay-line {
+        font-size: clamp(1.8rem, 8vw, 3rem);
+      }
+
+      /* Artwork list always visible and positioned in flow on mobile */
+      .essay-artwork-list {
+        position: static !important;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        padding: 10px 0;
+        margin-top: 0;
+      }
+
+      /* Center the 11th (last) item */
+      .essay-artwork-item:nth-child(11) {
+        grid-column: 3;
+      }
+
+      .essay-artwork-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+      }
+
+      .essay-artwork-item span {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -242,8 +299,21 @@
 
       let isAtEnd = false; // Track state to avoid repeated class toggles
 
+      // Mobile check and text update
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        const txt = document.querySelector('.essay-scroll-indicator .text');
+        if (txt) txt.textContent = 'SWIPE';
+        scrollY = window.scrollY; // Sync initial scroll state
+      }
+
       function updateVisuals() {
-        content.style.transform = `translateY(${-scrollY}px)`;
+        // Only transform on desktop
+        if (!isMobile) {
+          content.style.transform = `translateY(${-scrollY}px)`;
+        } else {
+          content.style.transform = 'none';
+        }
 
         // Scroll indicator - hide early
         if (scrollY > 50) {
@@ -296,12 +366,20 @@
 
       updateVisuals();
 
-      window.addEventListener('wheel', (e) => {
-        scrollY += e.deltaY;
-        if (scrollY < 0) scrollY = 0;
-        if (scrollY > maxScroll) scrollY = maxScroll;
-        requestAnimationFrame(updateVisuals);
-      });
+      // Event Listeners (Dual Mode)
+      if (isMobile) {
+        window.addEventListener('scroll', () => {
+          scrollY = window.scrollY;
+          requestAnimationFrame(updateVisuals);
+        });
+      } else {
+        window.addEventListener('wheel', (e) => {
+          scrollY += e.deltaY;
+          if (scrollY < 0) scrollY = 0;
+          if (scrollY > maxScroll) scrollY = maxScroll;
+          requestAnimationFrame(updateVisuals);
+        });
+      }
 
       // Gallery Link Transition
       const galleryLink = document.getElementById('link-gallery');

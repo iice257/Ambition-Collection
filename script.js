@@ -93,4 +93,41 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial State Check
   sections[0].classList.add('active');
   sections.forEach(sec => sec.classList.remove('fading-out'));
+
+  // --- MOBILE SWIPE SUPPORT & TEXT UPDATE ---
+
+  // 1. Update Text
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+  if (isMobile) {
+    const scrollText = document.querySelector('.scroll-indicator .text');
+    if (scrollText) scrollText.textContent = 'SWIPE';
+  }
+
+  // 2. Swipe Gestures
+  let touchStartY = 0;
+  let touchEndY = 0;
+  const minSwipeDistance = 50;
+
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: false });
+
+  window.addEventListener('touchend', (e) => {
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  }, { passive: false });
+
+  function handleSwipe() {
+    const distance = touchStartY - touchEndY;
+
+    if (Math.abs(distance) > minSwipeDistance) {
+      if (distance > 0) {
+        // Swipe Up -> Next (Scroll Down)
+        switchSection(1);
+      } else {
+        // Swipe Down -> Prev (Scroll Up)
+        switchSection(-1);
+      }
+    }
+  }
 });
