@@ -144,6 +144,36 @@
     .fullscreen-close:hover {
       opacity: 0.7;
     }
+
+    /* Mobile layout - stack vertically */
+    @media (max-width: 768px) {
+      .artwork-container {
+        display: flex;
+        flex-direction: column;
+        padding: 60px 16px 40px 16px;
+        gap: 24px;
+        min-height: auto;
+      }
+
+      .artwork-image {
+        width: 100%;
+        max-height: 50vh;
+        object-fit: contain;
+      }
+
+      .artwork-info {
+        padding: 0;
+      }
+
+      .artwork-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .artwork-description {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 

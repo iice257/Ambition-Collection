@@ -975,9 +975,9 @@ body.fade-out {
   .essay-visual-slot {
     width: 100%;
     height: auto;
-    min-height: 300px;
+    min-height: 0;
     order: 2;
-    margin-top: 40px;
+    margin-top: 0;
   }
 
   .essay-text-wrapper {

@@ -118,32 +118,37 @@
         font-size: clamp(1.8rem, 8vw, 3rem);
       }
 
-      /* Artwork list always visible and positioned in flow on mobile */
+      /* Artwork list - simple vertical list on mobile */
       .essay-artwork-list {
         position: static !important;
         transform: none !important;
         opacity: 1 !important;
         pointer-events: auto !important;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
-        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px 0;
         margin-top: 0;
       }
 
-      /* Center the 11th (last) item */
-      .essay-artwork-item:nth-child(11) {
-        grid-column: 3;
+      .essay-artwork-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
 
       .essay-artwork-item img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        flex-shrink: 0;
       }
 
       .essay-artwork-item span {
-        display: none;
+        display: block;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
     }
   </style>
@@ -207,7 +212,6 @@
         <br>
         <div class="essay-line"><a href="../list/" class="gallery-link" id="link-gallery"
             style="text-decoration: underline; color: inherit;">View Gallery</a></div>
-        <div style="height: 40vh;"></div>
       </div>
     </div>
 
