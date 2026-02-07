@@ -12,9 +12,9 @@ Built as a cinematic web experience, the site favors atmosphere over noise. Bold
 
 ![Hero](./assets/screenshots/hero.png)
 
-![Artwork Preview](./assets/screenshots/artwork-preview.png)
-
 ![Option Select](./assets/screenshots/selection.png)
+
+![Artwork Preview](./assets/screenshots/artwork-preview.png)
 
 ![Essay Page](./assets/screenshots/essay.png)
 
