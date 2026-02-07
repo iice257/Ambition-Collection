@@ -1,3 +1,37 @@
+# AMBITION
+
+## → https://ambition-collection.vercel.app/
+
+A minimalist digital exhibition exploring the human psyche through form, restraint, and visual tension.
+
+Built as a cinematic web experience, the site favors atmosphere over noise. Bold typography, controlled motion, and stark black and white composition guide the viewer through a curated collection rather than a traditional gallery.
+
+---
+
+## Preview
+
+![Hero](./assets/screenshots/hero.png)
+
+![Artwork Preview](./assets/screenshots/artwork-preview.png)
+
+![Option Select](./assets/screenshots/selection.png)
+
+![Essay Page](./assets/screenshots/essay.png)
+
+---
+
+## TL;DR
+
+- Digital art collection presented as an immersive web exhibit  
+- Masonry gallery with structured asymmetry  
+- Editorial essay with progressive text reveal  
+- Cinematic transitions across sections  
+- Mobile-first gesture support  
+- Zero visual clutter. Pure focus on the work.
+
+Open the collection. Move slowly. Let the pieces speak.
+
+
 # AMBITION  
 ### A Visual Essay on the Human Psyche
 
