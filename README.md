@@ -1,43 +1,18 @@
-# AMBITION
+# AMBITION — a visual essay on the human psyche
 
-## → https://ambition-collection.vercel.app/
+Eleven portraits. One frame. One word each.
 
-A minimalist digital exhibition exploring the human psyche through form, restraint, and visual tension.
+![AMBITION](./assets/screenshots/hero.png)
 
-Built as a cinematic web experience, the site favors atmosphere over noise. Bold typography, controlled motion, and stark black and white composition guide the viewer through a curated collection rather than a traditional gallery.
+Every piece shares the same structure. Only the person inside it changes, and the word under them names the pressure they live with: ambition, discipline, obsession, envy, fractured…
 
----
+![The gallery](./assets/screenshots/selection.png)
 
-## Preview
+**[Enter the collection →](https://ambition-collection.vercel.app)** · Black and white, cinematic motion, no clutter.
 
-![Hero](./assets/screenshots/hero.png)
+![Artwork page](./assets/screenshots/artwork-preview.png)
 
-![Option Select](./assets/screenshots/selection.png)
-
-![Artwork Preview](./assets/screenshots/artwork-preview.png)
-
-![Essay Page](./assets/screenshots/essay.png)
-
----
-
-## TL;DR
-
-- Digital art collection presented as an immersive web exhibit  
-- Masonry gallery with structured asymmetry  
-- Editorial essay with progressive text reveal  
-- Cinematic transitions across sections  
-- Mobile-first gesture support  
-- Zero visual clutter. Pure focus on the work.
-
-Open the collection. Move slowly. Let the pieces speak.
-
-
-# AMBITION  
-### A Visual Essay on the Human Psyche
-
-AMBITION is a conceptual, black-and-white web experience that explores human traits through repetition, structure, and restraint.  
-It is not a product site. It is not a portfolio.  
-It is an editorial system designed to be read, navigated, and felt.
+![The essay](./assets/screenshots/essay.png)
 
 ---
 
